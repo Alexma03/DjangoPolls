@@ -6,6 +6,16 @@
 </head>
 <body>
 <h1>{{ q.question_text }}</h1>
+<form action="{% url 'polls:vote' q.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ q.question_text }}</h1></legend>
+        {% for c in q.choice_set.all %}
+            <p><input type="radio" name="choice" value="{{ c.id }}">{{ c.choice_text }}</p>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Vote">
+</form>
 <ul>
     {% for choice in q.choice_set.all %}
         <li>{{ choice.choice_text }}</li>

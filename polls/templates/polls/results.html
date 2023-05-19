@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>results</title>
+    <link rel="stylesheet" href="{% static 'polls/css/style.css' %}">
+</head>
+<body>
+    <h1>{{ q.question_text }}</h1>
+    <ul>
+        {% for c in q.choice_set.all %}
+            <li>Pregunta {{ c.choice_text }} - votos: {{ c.votes }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'polls:detail' q.id %}">volver a votar</a>
+</body>
+</html>
